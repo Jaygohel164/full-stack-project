@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/Jaygohel164/full-stack-project.git'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t nextjs-app .'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh '''
+                docker stop nextjs-app || true
+                docker rm nextjs-app || true
+                docker run -d -p 3001:3001 --name nextjs-app nextjs-app
+                '''
+            }
+        }
+    }
+}
