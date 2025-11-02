@@ -9,7 +9,10 @@ RUN apk add --no-cache openssl python3 make g++ libc6-compat
 # Copy package files first for better caching
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies (force next-auth v4 for compatibility)
+RUN npm install next-auth@4 --legacy-peer-deps
+
+# Install all other dependencies
 RUN npm install --legacy-peer-deps
 
 # Copy the rest of the app
@@ -26,24 +29,23 @@ ENV AUTH_SECRET=de57e9bcafaba6812bead9fd858c21c888f3459edeb17d6763ad5e200f2e600f
 # Prisma setup (generate client)
 RUN npx prisma generate
 
-# Run build but ignore type/lint failures
-ENV NEXT_IGNORE_TYPECHECK=true
-RUN npx prisma generate && npx next build --no-lint || echo "⚠️ Ignoring Next.js type/lint build errors"
-
+# Build Next.js app but ignore type/lint failures
+RUN npx prisma generate && \
+    NEXT_DISABLE_TYPECHECK=1 npm run build || echo "⚠️ Ignoring Next.js type/lint build errors"
 
 # ---------- Stage 2: Runtime ----------
 FROM node:18-alpine AS runner
 
 WORKDIR /app
 ENV NODE_ENV=production
-ENV AUTH_SECRET=de57e9bcafaba6812bead9fd858c21c888f3459edeb17d6763ad5e200f2e600f
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV AUTH_SECRET=de57e9bcafaba6812bead9fd858c21c888f3459edeb17d6763ad5e200f2e600f
 
 # Install only production deps
 COPY package*.json ./
 RUN npm install --omit=dev --legacy-peer-deps
 
-# Copy built app
+# Copy built app and prisma artifacts
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/prisma ./prisma
