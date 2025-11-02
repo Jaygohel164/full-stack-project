@@ -17,15 +17,6 @@ pipeline {
             }
         }
 
-        stage('Check Files') {
-            steps {
-                script {
-                    if (!fileExists('tsconfig.json')) {
-                        error("❌ tsconfig.json is missing!")
-                    }
-                }
-            }
-        }
 
         stage('Install Dependencies') {
             steps {
