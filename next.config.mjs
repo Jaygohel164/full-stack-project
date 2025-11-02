@@ -1,16 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true,     // ✅ enable server actions
+    serverActions: true, // ✅ enable Server Actions
   },
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },
-  // ✅ force Node.js runtime instead of Edge
-  output: "standalone",
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  output: "standalone", // ✅ required for Docker/Prod
+  // ✅ disable Edge runtime for all routes
+  env: {
+    NEXT_RUNTIME: "nodejs",
+  },
+  webpack: (config) => {
+    config.resolve.fallback = { fs: false, path: false };
+    return config;
   },
 };
 
