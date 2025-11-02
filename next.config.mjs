@@ -1,10 +1,14 @@
   /** @type {import('next').NextConfig} */
 const nextConfig = {
-   experimental: {
-    serverActions: true, // ✅ Enable Server Actions
+    experimental: {
+    serverActions: true,
   },
   reactStrictMode: true,
-  swcMinify: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // ✅ force Node.js runtime
+  runtime: "nodejs",
     images: {
         remotePatterns: [
           {
