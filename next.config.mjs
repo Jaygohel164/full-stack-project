@@ -1,31 +1,23 @@
-  /** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   runtime: "nodejs",
+  reactStrictMode: true,
+
   experimental: {
     serverActions: {
-      allowedOrigins: ['*'], // or restrict to your domain
-      bodySizeLimit: '2mb',
+      allowedOrigins: ['*'],   // allow all origins (optional)
+      bodySizeLimit: '2mb',    // optional
     },
+    serverActions: true, // ✅ this actually enables the feature
   },
-   serverRuntimeConfig: {},
-  reactStrictMode: true,
-    images: {
-        remotePatterns: [
-          {
-            protocol: "https",
-            hostname: "images.unsplash.com"
-          },
-          {
-            protocol: "https",
-            hostname: "utfs.io"
-          },
-          {
-            protocol: "https",
-            hostname: "lh3.googleusercontent.com"
-          }
-        ]
-      }
-    };
 
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "images.unsplash.com" },
+      { protocol: "https", hostname: "utfs.io" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+    ],
+  },
+};
 
 export default nextConfig;
