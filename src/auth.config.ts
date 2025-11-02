@@ -4,6 +4,8 @@ import Google from "next-auth/providers/google";
 
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
+
+
 import { NextAuthConfig } from "next-auth/lib";
 
 const authConfig = {
