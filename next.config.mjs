@@ -2,7 +2,10 @@
 const nextConfig = {
   runtime: "nodejs",
   experimental: {
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: ['*'], // or restrict to your domain
+      bodySizeLimit: '2mb',
+    },
   },
     images: {
         remotePatterns: [
