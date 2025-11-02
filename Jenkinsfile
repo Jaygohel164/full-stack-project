@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs 'node'
+        nodejs 'node'  // Make sure this matches Jenkins → Tools → NodeJS installations
     }
     environment {
         DOCKERHUB_USER = 'jaygohel93'
@@ -38,6 +38,13 @@ pipeline {
             steps {
                 echo "Building Next.js project..."
                 sh 'npm run build'
+            }
+        }
+
+        stage('Cleanup Old Docker Images') {
+            steps {
+                echo "Cleaning up old Docker images..."
+                sh 'docker system prune -af || true'
             }
         }
 
