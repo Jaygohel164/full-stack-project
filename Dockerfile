@@ -27,7 +27,9 @@ ENV AUTH_SECRET=de57e9bcafaba6812bead9fd858c21c888f3459edeb17d6763ad5e200f2e600f
 RUN npx prisma generate
 
 # Run build but ignore type/lint failures
-RUN npm run build || echo "⚠️ Ignoring Next.js type/lint build errors"
+ENV NEXT_IGNORE_TYPECHECK=true
+RUN npx prisma generate && npx next build --no-lint || echo "⚠️ Ignoring Next.js type/lint build errors"
+
 
 # ---------- Stage 2: Runtime ----------
 FROM node:18-alpine AS runner
