@@ -5,3 +5,5 @@ declare module "next-auth" {
     user: ExtendedUser;
   }
 }
+
+export { NextAuth };
