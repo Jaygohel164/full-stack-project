@@ -2,14 +2,10 @@
 
 import * as z from "zod";
 import { signIn } from "next-auth/react";
-
 try {
 } catch (error) {
   console.error("Login failed:", error);
 }
-
-
-import { signIn } from "@/auth";
 import { LoginSchema } from "@/schemas";
 import { getUserByEmail } from "@/data/user";
 import { 
