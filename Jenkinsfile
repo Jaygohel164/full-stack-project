@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools {
+        nodejs 'node'
+    }
     environment {
         DOCKERHUB_USER = 'jaygohel93'
         IMAGE_NAME = 'nextjs-app'
@@ -8,11 +10,20 @@ pipeline {
     }
 
     stages {
-
         stage('Clone Repository') {
             steps {
-                echo " Cloning repository..."
-                git branch: 'main', url:'https://github.com/Jaygohel164/full-stack-project.git'
+                echo "Cloning repository..."
+                git branch: 'main', url: 'https://github.com/Jaygohel164/full-stack-project.git'
+            }
+        }
+
+        stage('Check Files') {
+            steps {
+                script {
+                    if (!fileExists('tsconfig.json')) {
+                        error("❌ tsconfig.json is missing!")
+                    }
+                }
             }
         }
 
@@ -33,7 +44,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo "Building Docker image..."
-                sh 'docker build -t ${IMAGE_NAME} .'
+                sh 'docker build --no-cache -t ${IMAGE_NAME} .'
             }
         }
 
