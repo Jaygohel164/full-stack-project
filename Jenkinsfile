@@ -12,7 +12,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo " Cloning repository..."
-                git 'https://github.com/Jaygohel164/full-stack-project.git'
+                git 'git branch: 'main', url:'https://github.com/Jaygohel164/full-stack-project.git'
             }
         }
 
