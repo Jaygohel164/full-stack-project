@@ -1,4 +1,15 @@
 {
-  "node": {},
+  "node": {
+    "cbc766b3545dccaec562fb72412a77f1bcdc120d": {
+      "workers": {
+        "app/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22E%3A%5C%5CProject%5C%5Cfull-stack-project%5C%5Csrc%5C%5Cactions%5C%5Clogin.ts%22%2C%5B%22login%22%5D%5D%5D&__client_imported__=true!",
+        "app/auth/login/page": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22E%3A%5C%5CProject%5C%5Cfull-stack-project%5C%5Csrc%5C%5Cactions%5C%5Clogin.ts%22%2C%5B%22login%22%5D%5D%5D&__client_imported__=true!"
+      },
+      "layer": {
+        "app/page": "action-browser",
+        "app/auth/login/page": "action-browser"
+      }
+    }
+  },
   "edge": {}
 }

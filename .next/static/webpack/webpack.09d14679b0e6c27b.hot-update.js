@@ -9,6 +9,18 @@
  */
 self["webpackHotUpdate_N_E"]("webpack",{},
 /******/ function(__webpack_require__) { // webpackRuntimeModules
+/******/ /* webpack/runtime/compat get default export */
+/******/ !function() {
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function() { return module['default']; } :
+/******/ 			function() { return module; };
+/******/ 		__webpack_require__.d(getter, { a: getter });
+/******/ 		return getter;
+/******/ 	};
+/******/ }();
+/******/ 
 /******/ /* webpack/runtime/create fake namespace object */
 /******/ !function() {
 /******/ 	var getProto = Object.getPrototypeOf ? function(obj) { return Object.getPrototypeOf(obj); } : function(obj) { return obj.__proto__; };
@@ -39,9 +51,18 @@ self["webpackHotUpdate_N_E"]("webpack",{},
 /******/ 	};
 /******/ }();
 /******/ 
+/******/ /* webpack/runtime/get mini-css chunk filename */
+/******/ !function() {
+/******/ 	// This function allow to reference all chunks
+/******/ 	__webpack_require__.miniCssF = function(chunkId) {
+/******/ 		// return url for filenames based on template
+/******/ 		return "static/css/" + chunkId + ".css";
+/******/ 	};
+/******/ }();
+/******/ 
 /******/ /* webpack/runtime/getFullHash */
 /******/ !function() {
-/******/ 	__webpack_require__.h = function() { return "4037c81041d15a37"; }
+/******/ 	__webpack_require__.h = function() { return "34bbfd3efc727439"; }
 /******/ }();
 /******/ 
 /******/ }
